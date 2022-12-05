@@ -3,20 +3,28 @@ Quick notes: I haven't actually used github before so I'm not sure how to import
 
 a)
   numbers = [0-9]
+  
   letters = [a-z]*[A-Za-z0-9_]*
+  
   whitespace = \\s+
+  
   punctuation = (?=\\p{Punct})|(?<=\\p{Punct})
+  
   quotations = (?=([^\"]*\"[^\"]*\")*[^\"]*$)
   
 b) For operations, I would have to do parentheses first, then multiplication/division/module, then addition/subtraction.
 Comparing comes after that (<, >, <=, >=, ==, !=)
 
 c) coding
+
 d) coding
+
 e) in code
+
 f) in code
 
 g) I included text files in dropbox and provided the contents in the .md file
+
 * lexical error - sequence of characters that doesnt match the pattern of any token.
   - exceed length of identifier/numeric constants
 	- appearance of illegal character (ex: $ after ;)
@@ -33,8 +41,11 @@ g) I included text files in dropbox and provided the contents in the .md file
 	- forgetting class/object name as part of method call
 	- omitting break clause from switch statements or return statement
 	- mistyping header for main() method
+
 To make it easier to implement:
+
 For lexical error, I only show spelling error (ex: int 3num -> identifier cant start with a number)
+
 For syntax error, I only show missing "", {}, and ()
 
 h) incomplete
