@@ -7,6 +7,7 @@ a)
   whitespace = \\s+
   punctuation = (?=\\p{Punct})|(?<=\\p{Punct})
   quotations = (?=([^\"]*\"[^\"]*\")*[^\"]*$)
+  
 b) For operations, I would have to do parentheses first, then multiplication/division/module, then addition/subtraction.
 Comparing comes after that (<, >, <=, >=, ==, !=)
 
