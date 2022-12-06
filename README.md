@@ -12,8 +12,38 @@ a)
   
   quotations = (?=([^\"]*\"[^\"]*\")*[^\"]*$)
   
-b) For operations, I would have to do parentheses first, then multiplication/division/module, then addition/subtraction.
+  EBNF:
+  
+  <lex> --> <keyword> | <operation> | <punctuation> | <number> | <content> | <identifier>
+  
+  <keyword> --> <for> | <while> | <if> | <else>
+  
+  <operation> --> (<+> | <-> | <*> | </> | <boolean> | <=>)
+  
+  <boolean> --> (< == > | < <= > | < >= > | < > > | < < >)
+  
+  <syntax> --> <()> | <[]> | <{}> | <" "> | <' '>
+   
+   
+b) For operations, I would have to do parentheses first, then multiplication/division, then addition/subtraction.
 Comparing comes after that (<, >, <=, >=, ==, !=)
+
+Precedence order of operations:
+
+<1> --> ()
+
+<2> --> ^ (exponential)
+
+<3> --> * | /
+
+<4> --> + | -
+
+<5> --> %
+
+<6> --> <boolean>
+
+<boolean> --> (< == > | < <= > | < >= > | < > > | < < >)
+
 
 c) coding
 
@@ -48,4 +78,4 @@ For lexical error, I only show spelling error (ex: int 3num -> identifier cant s
 
 For syntax error, I only show missing "", {}, and ()
 
-h) incomplete
+h) pdf
