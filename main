@@ -54,74 +54,57 @@ public class Exam2 {
         }
         else if (input.matches("[0-9]*[A-Za-z_]")) {    //identifier that starts with a number
             System.out.println(input + " - Lexical Error (Identifier can't start with a number)");
+            System.exit(0);                             //terminates if error is found
         }
         else if (input.matches("[0-9]+$")) {        //numbers
             System.out.println(input + " - Number");
         }
         else {
-            //any syntax error where there's only 1 " will cause an error when splitting (show up in sentence)
-            String[] separation = input.split("(\\s+|(?=\\p{Punct})|(?<=\\p{Punct}))"); //split again
-            for (int i = 0; i < separation.length; i++) {
-                if (separation[i] != "" && !separation[i].equals("\"")) {
-                    lex(separation[i]);         //go through lex again
-                }
-                if (separation[i].matches("\"")) {      //anything that doesn't belong in the rest of if-else if
-                    System.out.println(separation[i] + " - Error");
-                }
-            }
+            System.out.println(input + " - Error");
+            checkE(input);                          
+            System.exit(0);                         //terminates if error is found
         }
     }
 
     //this is part f. check syntax error
-    public static void checkE(File file) throws Exception {
-        int count_q1 = 0;
+    public static void checkE(String input) {
         int count_b = 0;
         int count_p = 0;
         int count_o = 0;
-        Scanner input1 = new Scanner(file);     //read file
-        while (input1.hasNextLine()) {
-            String input = input1.nextLine();   //get the next line
-            int count_q = 0;                    //put this here for quotations so it could reset to 0 after each loop
-            for (int i = 0; i < input.length(); i++) {      //check the line
-                if (input.charAt(i) == '"' || input.charAt(i) == '\'') {    //check to see how many " or '
-                    count_q++;
-                }
-                if (input.charAt(i) == '[' || input.charAt(i) == ']') {     //check to see how many [ or ]
-                    count_b++;
-                }
-                if (input.charAt(i) == '{' || input.charAt(i) == '}') {     //check to see how many { or }
-                    count_p++;
-                }
-                if (input.charAt(i) == '(' || input.charAt(i) == ')') {     //check to see how many ( or )
-                    count_o++;
-                }
+        int count_q = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '"' || input.charAt(i) == '\'') {    //check to see how many " or '
+                count_q++;
             }
-            if (count_q % 2 != 0) {     //this is for quotations (opening and closing quotations is always on 1 line)
-                count_q1++;             //if it's even, then all quotation marks are closed, if odd then it's not closed
+            if (input.charAt(i) == '[' || input.charAt(i) == ']') {     //check to see how many [ or ]
+                count_b++;
             }
-        }
-
-        //if count_q1 is bigger than 0, then that means it has lines where quotations arent closed
-        if (count_q1 > 0) {
-            System.out.println("Syntax Error (quotations aren't close): " + count_q1);
+            if (input.charAt(i) == '{' || input.charAt(i) == '}') {     //check to see how many { or }
+                count_p++;
+            }
+            if (input.charAt(i) == '(' || input.charAt(i) == ')') {     //check to see how many ( or )
+                count_o++;
+            }
         }
 
         //if it's odd, then that means they aren't close since it should be in pairs
+        if (count_q % 2 != 0) {
+            System.out.println("Syntax Error (quotations aren't close)");
+        }
+
         if (count_b % 2 != 0) {
-            System.out.println("Syntax Error (bracket(s) aren't close)");
+            System.out.println("Syntax Error (brackets aren't close)");
         }
         if (count_p % 2 != 0) {
-            System.out.println("Syntax Error (brace(s) aren't close)");
+            System.out.println("Syntax Error (braces aren't close)");
         }
         if (count_o % 2 != 0) {
-            System.out.println("Syntax Error (parenthese(s) aren't close)");
+            System.out.println("Syntax Error (parentheses aren't close)");
         }
     }
 
     public static void main(String[] args) throws Exception {
-        File file = new File("C:\\Users\\thung\\Downloads\\test2.txt");     //text file
+        File file = new File("C:\\Users\\thung\\Downloads\\test1.txt");     //text file
         importFile(file);       //check lexical error
-        System.out.println();
-        checkE(file);           //check syntax error
     }
 }
